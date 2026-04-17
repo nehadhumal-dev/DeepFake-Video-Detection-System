@@ -6,15 +6,16 @@
   font-family: Arial, sans-serif;
 }
 
+/* ================= BODY ================= */
 body {
   background: #000;
   color: white;
-  overflow: hidden;
+
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* ================= BACKGROUND GLOW ================= */
-
-/* Bottom Glow */
 body::after {
   content: "";
   position: fixed;
@@ -32,13 +33,11 @@ body::after {
   );
 
   filter: blur(70px);
-
   z-index: -1;
 
   animation: pulseGlow 6s ease-in-out infinite;
 }
 
-/* Soft curve layer */
 body::before {
   content: "";
   position: fixed;
@@ -59,7 +58,6 @@ body::before {
   z-index: -1;
 }
 
-/* Glow animation */
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
@@ -68,7 +66,9 @@ body::before {
 /* ================= GLASS CARD ================= */
 
 .glass-card {
-  width: 520px;
+  width: 90%;
+  max-width: 950px;
+
   padding: 50px;
 
   border-radius: 30px;
@@ -84,16 +84,13 @@ body::before {
 
   text-align: center;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 60px auto;
 }
 
 /* ================= HEADING ================= */
 
 .glass-card h1 {
-  font-size: 32px;
+  font-size: 34px;
   margin-bottom: 35px;
 
   text-shadow:
@@ -119,25 +116,18 @@ body::before {
   color: white;
 
   cursor: pointer;
-
   transition: all 0.3s ease;
 }
 
-/* Hover */
 .type-select button:hover {
   transform: scale(1.05);
   background: rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 0 15px rgba(123,92,255,0.4);
+  box-shadow: 0 0 15px rgba(123,92,255,0.4);
 }
 
-/* Active */
 .type-select button.active {
   background: linear-gradient(135deg, #7b5cff, #00d4ff);
-
-  box-shadow:
-    0 0 20px rgba(123,92,255,0.6);
+  box-shadow: 0 0 20px rgba(123,92,255,0.6);
 }
 
 /* ================= UPLOAD BUTTON ================= */
@@ -153,16 +143,13 @@ body::before {
   color: white;
 
   cursor: pointer;
-
   transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
   background: rgba(255,255,255,0.1);
   transform: scale(1.05);
-
-  box-shadow:
-    0 0 20px rgba(123,92,255,0.4);
+  box-shadow: 0 0 20px rgba(123,92,255,0.4);
 }
 
 /* ================= DETECT BUTTON ================= */
@@ -180,32 +167,130 @@ body::before {
 
   background: linear-gradient(135deg, #7b5cff, #a855f7);
 
-  box-shadow:
-    0 0 30px rgba(123,92,255,0.6);
+  box-shadow: 0 0 30px rgba(123,92,255,0.6);
 
   cursor: pointer;
-
   transition: all 0.3s ease;
 }
 
-/* Hover */
 .detect-btn:hover {
   transform: scale(1.06);
+  box-shadow: 0 0 50px rgba(168,85,247,0.9);
+}
 
-  box-shadow:
-    0 0 50px rgba(168,85,247,0.9);
+/* ================= RESULT BOX ================= */
+
+#resultBox {
+  margin-top: 40px;
+  animation: fadeIn 0.6s ease;
+}
+
+/* ================= PREMIUM RESULT CARD ================= */
+
+.result-card {
+  padding: 25px;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+
+  transition: 0.4s ease;
+}
+
+/* 🔴 AI */
+.result-card.fake {
+  border: 1px solid rgba(255,80,80,0.6);
+  box-shadow: 0 0 30px rgba(255,80,80,0.4);
+}
+
+/* 🟢 REAL */
+.result-card.real {
+  border: 1px solid rgba(80,255,120,0.6);
+  box-shadow: 0 0 30px rgba(80,255,120,0.4);
+}
+
+.result-card h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+/* ================= CONFIDENCE BAR ================= */
+
+.confidence-bar {
+  width: 100%;
+  height: 10px;
+
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7b5cff, #00d4ff);
+  transition: width 0.6s ease;
+}
+
+.confidence-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ================= EXPLANATION ================= */
+
+.explanation {
+  margin-top: 15px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+/* ================= IMAGE GRID ================= */
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  margin-top: 25px;
+}
+
+.image-grid img {
+  width: 100%;
+  border-radius: 12px;
+
+  box-shadow: 0 0 20px rgba(123,92,255,0.4);
+
+  transition: transform 0.3s ease;
+}
+
+.image-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .glass-card {
-    width: 90%;
+    width: 95%;
     padding: 30px;
   }
 
   .type-select {
     flex-direction: column;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -230,34 +315,27 @@ body::before {
   pointer-events: none;
 
   transition: 0.4s ease;
-
   z-index: 999;
 }
 
-/* SHOW */
 #scanOverlay.active {
   opacity: 1;
   pointer-events: all;
 }
 
-/* SCANNER BOX */
 .scanner-box {
   width: 300px;
   height: 200px;
 
   border-radius: 20px;
-
   border: 1px solid rgba(123,92,255,0.6);
 
   position: relative;
 
-  box-shadow:
-    0 0 40px rgba(123,92,255,0.5);
-
+  box-shadow: 0 0 40px rgba(123,92,255,0.5);
   overflow: hidden;
 }
 
-/* 🔥 SCAN LINE */
 .scan-line {
   position: absolute;
   top: -100%;
@@ -275,7 +353,6 @@ body::before {
   animation: scanMove 2s linear infinite;
 }
 
-/* TEXT */
 .scanner-box p {
   position: absolute;
   bottom: 15px;
@@ -286,7 +363,6 @@ body::before {
   color: #ccc;
 }
 
-/* ANIMATION */
 @keyframes scanMove {
   0% { top: -100%; }
   100% { top: 100%; }
